@@ -1,0 +1,68 @@
+.header {
+  background-color: #1e8aa5;
+  display: flex;
+  justify-content: center;
+
+  .container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .navbar {
+      display: flex;
+      width: 100%;
+
+      .navbar-item {
+        color: white;
+        padding: 8px 8px;
+        font-size: 20px;
+        cursor: pointer;
+        text-transform: capitalize;
+        margin: 0 5px;
+
+        &:hover {
+          color: rgb(77, 212, 161);
+          transition: 0.4s all;
+        }
+        @media screen and (max-width: 800px) {
+          font-size: 18px;
+          padding: 8px 5px;
+        }
+      }
+    }
+    .header-search {
+      position: absolute;
+      right: 5%;
+      height: 82%;
+      width: 276px;
+      font-size: 14px;
+      padding: 8px 12px;
+      border: 1px solid #4c9ea5;
+      background-color: rgb(241, 239, 239);
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.49);
+      @media screen and (min-width: 1151px) {
+        right: 4%;
+      }
+      @media screen and (max-width: 800px) {
+        top: 100%;
+        right: 0;
+      }
+    }
+    .search-icon {
+      margin: 0 6px;
+      cursor: pointer;
+      font-size: 40px;
+      height: 100%;
+      color: white;
+
+      @media screen and (max-width: 800px) {
+        font-size: 30px;
+      }
+    }
+  }
+
+
+
+
+ 
+}

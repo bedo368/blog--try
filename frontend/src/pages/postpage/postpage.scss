@@ -1,0 +1,70 @@
+.postpage {
+    width: 100%;
+    position: absolute;
+    top: 150px;
+    display: flex;
+    justify-content: center;
+
+
+    
+    .container {
+        height: 100%;
+        border: 8px solid #55c5d5;
+        border-radius: 5px;
+        background-color: white;
+        padding-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        .title{
+
+            margin: 20px 20px 10px 20px;
+
+        }
+
+        .sub_info{
+            display: flex;
+            margin: 40px 30px ;
+            border-bottom: 1px solid #c1c6c7;
+    
+            .writer{
+                margin: 0 20px;
+                display: flex;
+                align-items: center;
+                img{
+                    cursor: pointer;
+                    margin: 0 10px;
+                    width: 30px;
+                    height: 30PX;
+                    border-radius: 50%;
+                }
+                
+            }
+            p{
+                display: flex;
+                align-items: center;
+                margin: 20px;
+                justify-content: center;
+            }
+            
+    
+        }
+
+        .image-container {
+            align-self: center;
+
+            img{
+                margin-top: 10px;
+                max-width: 400px;
+                border-radius: 4px;
+            }
+        }
+        .content{
+            margin : 30px;
+            font-size: 20px;
+        }
+
+
+
+    }
+  }
+  

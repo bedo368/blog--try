@@ -1,0 +1,28 @@
+.socialmediaicons{
+    height: 100%;
+
+    .icons{
+        height: 100%;
+
+        display: flex;
+        .icon{
+            margin: 0 6px;
+            cursor: pointer;
+            font-size: 40px;
+            height: 100%;
+            color: white;
+
+            &:hover{
+                border-bottom: 2px solid rgb(252, 252, 252);
+                transition: .4s all;
+
+            }
+            @media screen and (max-width : 800px) {
+                font-size: 30px;
+            }
+        }
+       
+
+    }
+    
+}

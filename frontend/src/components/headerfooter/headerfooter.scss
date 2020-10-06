@@ -1,0 +1,23 @@
+.headerfooter{
+    background: rgb(30,138,165);
+    background: linear-gradient(180deg, rgba(30,138,165,1) 26%, rgba(223,219,219,1) 97%);
+    height: 100vmax;
+    width: auto;
+    display: flex;
+    justify-content: center;    
+.container{
+
+    h1{ 
+        font-family:'Times New Roman', Times, serif;
+        color: white;
+        text-transform: capitalize;
+        font-size: 40px;
+        margin: 30px 50px;
+        cursor: pointer;
+        width: fit-content;
+    }
+    }
+
+
+
+}
