@@ -18,7 +18,15 @@ app.use(
     rootValue: resolver,
   })
 );
-
+app.use((req ,res , next)=>{
+  res.setHeader("Access-Control-Allow-Origin" , `*`)
+  res.setHeader("Access-Control-Allow-Methods" , `POST,GET,OPTIONS`)
+  res.setHeader("Access-Control-Allow-Headers" , `Content-Type , Authorization`)
+  if ( req.method === "OPTIONS"){
+    return res.sendStatus(200)
+  }
+   next()
+})
 mongoose
   .connect(
     "mongodb+srv://bedo:Aa00110022@cluster0.u2zoo.mongodb.net/blogpost",
