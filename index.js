@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const { graphqlHTTP } = require("express-graphql");
 const mongoose = require("mongoose");
+require('dotenv').config()
 app.use(bodyParser.json());
 const schema = require("./modules/schema/qraphqlschema")
 const resolver = require("./modules/resolovers/resolovers")
@@ -30,7 +31,7 @@ app.use((req ,res , next)=>{
 })
 mongoose
   .connect(
-    "mongodb+srv://bedo:Aa00110022@cluster0.u2zoo.mongodb.net/blogpost",
+    process.env.mongdburl,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("connected to data base"))
