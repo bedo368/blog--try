@@ -5,7 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
- 
+  background-color: rgba(118, 223, 218, 0.144);
+  
+
 }
 
 code {
@@ -19,5 +21,5 @@ code {
   box-sizing: border-box;
 }
 .container{
-  width: 1400px;
+  width: 1500px;
 }

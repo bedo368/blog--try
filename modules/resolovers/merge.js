@@ -1,43 +1,50 @@
 const User = require("../schema/userschema");
-const  Comment = require("../schema/comment.schema");
+const Comment = require("../schema/comment.schema");
 const Post = require("../schema/postschema");
 
+const fitchCommetOfPost = async (comentsId) => {
+  const postComments = await Comment.find({ _id: { $in: comentsId } });
 
-const fitchCommetOfPost =  async(comentsId)=>{
+  return postComments.map((comment) => {
+    return {
+      ...comment._doc,
+      commentCreator: getUser.bind(this, comment._doc.commentCreator),
+    };
+  });
+};
 
-    const postComments = await Comment.find({ _id: { $in: comentsId }})
+const getUser = async (userId) => {
+  const postCreator = await User.findById(userId);
 
-    return postComments.map((comment)=>{
-        return {...comment._doc  , commentCreator : getUser.bind(this ,comment._doc.commentCreator )
-         }
-    })
-}
+  return {
+    ...postCreator._doc,
+    password: null,
+    createdPost: getUserPosts.bind(this, postCreator._doc.createdPost),
+  };
+};
 
-const getUser = async (userId )=>{
-    const postCreator = await User.findById(userId)
+const getUserPosts = async (postsId) => {
+  const fetchUserPosts = await Post.find({ _id: { $in: postsId } });
+  return fetchUserPosts.map((post) => {
+    return {
+      ...post._doc,
+      postCreator: getUser.bind(this, post._doc.postCreator),
+      relatedComment: fitchCommetOfPost.bind(this, post._doc.relatedComment),
+    };
+  });
+};
 
-    return { 
-        ...postCreator._doc , 
-        password : null,
-        createdPost : getUserPosts.bind(this ,postCreator._doc.createdPost ),
+const getPostById = async (postId) => {
+    console.log("ddd");
+  const fitchedPost = await Post.findById(postId);
 
-    }
-}
-
-const getUserPosts = async (postsId)=>{
-    const fetchUserPosts = await Post.find({ _id: { $in: postsId }})
-    return fetchUserPosts.map(post=>{
-        return {
-            ...post._doc,
-            postCreator: getUser.bind(this ,post._doc.postCreator ),
-            relatedComment : fitchCommetOfPost.bind(this ,post._doc.relatedComment  )
-
-        }
-    })
-}
-
-
-
+  return {
+    ...fitchedPost._doc,
+    postCreator: getUser.bind(this, fitchedPost._doc.postCreator),
+    relatedComment: fitchCommetOfPost.bind(this, fitchedPost._doc.relatedComment),
+  };
+};
 
 exports.getUser = getUser;
-exports.fitchCommetOfPost = fitchCommetOfPost ;
+exports.fitchCommetOfPost = fitchCommetOfPost;
+exports.getPostById = getPostById 

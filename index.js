@@ -6,9 +6,10 @@ const mongoose = require("mongoose");
 app.use(bodyParser.json());
 const schema = require("./modules/schema/qraphqlschema")
 const resolver = require("./modules/resolovers/resolovers")
-
+const cors = require("cors");
+const path = require("path");
 const isAuth = require("./middleware/is-auth")
-
+app.use(cors());
 app.use(isAuth)
 app.use(
   "/graphql",
@@ -21,7 +22,7 @@ app.use(
 app.use((req ,res , next)=>{
   res.setHeader("Access-Control-Allow-Origin" , `*`)
   res.setHeader("Access-Control-Allow-Methods" , `POST,GET,OPTIONS`)
-  res.setHeader("Access-Control-Allow-Headers" , `Content-Type , Authorization`)
+  res.setHeader("Access-Control-Allow-Headers" , `Content-Type ,Authorization`)
   if ( req.method === "OPTIONS"){
     return res.sendStatus(200)
   }

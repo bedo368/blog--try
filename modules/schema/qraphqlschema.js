@@ -49,8 +49,8 @@ module.exports = buildSchema(`
     }
 
     type rootMutation {
-        createPost (title: String content: String! date: String  ) : Post!
-        createUser ( email: String!  password: String! displayName: String! photo: String! date: String ) : User!
+        createPost (title: String! content:String date: String  ) : Post!
+        createUser ( email: String!  password: String! displayName: String! photo: String date: String ) : User!
         addComment (commentContent: String! relatedPost: String! date: String  ): Comment! 
     }
 

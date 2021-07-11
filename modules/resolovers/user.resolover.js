@@ -10,7 +10,7 @@ const userQyery = {
     return {...user}
   },
   login : async({email , password })=>{
-    const user =  await User.findOne({email});
+    const user =  await User.findOne({email : email.toLowerCase() });
     if(!user){
       throw new Error("USER IS NOT EXISIST")
     }
@@ -19,7 +19,7 @@ const userQyery = {
     if(!isEqual){
       throw Error("Password is incorrect")
     }
-    const token = await jwt.sign({userId : user._id, email:user.email } , "Passwordiscorrect" , {expiresIn : "1h"} )
+    const token = await jwt.sign({userId : user._id, email:user.email } , "Passwordiscorrect" , {expiresIn : "24h"} )
 
     return { 
       userId : user._id,
@@ -43,7 +43,7 @@ const userQyery = {
 const userMutation = {
     createUser: async ({ email, password, displayName, photo, date }) => {
       try {
-        const checkUserExist = await User.findOne({ email });
+        const checkUserExist = await User.findOne({ email : email.toLowerCase() });
         if (checkUserExist) {
           throw new Error("user is already exist");
         }
@@ -51,7 +51,7 @@ const userMutation = {
         const hashedpassword = await bcrypt.hash(password, saltRounds);
   
         const newUser = new User({
-          email,
+          email : email.toLowerCase(),
           password: hashedpassword,
           date: new Date(),
           displayName,

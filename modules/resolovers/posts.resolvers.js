@@ -1,10 +1,13 @@
 const Post = require("../schema/postschema");
 const User = require("../schema/userschema");
-const { fitchCommetOfPost ,getUser } = require("./merge");
+const { fitchCommetOfPost, getUser } = require("./merge");
 const postMutation = {
-  createPost: async ({ title, content, date }) => {
+  createPost: async ({ title, content, date }, req) => {
+    if (!req.isAuth) {
+      throw new Error("un auth");
+    }
     try {
-      const creator = await User.findById("5f7c959c27fbea2ca72c110b");
+      const creator = await User.findById(req.userId);
       if (!creator) {
         throw new Error("post should have creator");
       }
@@ -32,21 +35,17 @@ const postMutation = {
 };
 
 const postQuery = {
-    getAllPosts: async () => {
+  getAllPosts: async () => {
     try {
       const allPosts = await Post.find();
-      
-      return allPosts.map(post =>{
-         
-          return {
-              ...post._doc ,
-              relatedComment : fitchCommetOfPost(post.relatedComment),
-              postCreator : getUser(post._doc.postCreator)
-          }
-      })
-        
-      
-      
+
+      return allPosts.map((post) => {
+        return {
+          ...post._doc,
+          relatedComment: fitchCommetOfPost(post.relatedComment),
+          postCreator: getUser(post._doc.postCreator),
+        };
+      });
     } catch (error) {
       throw error;
     }
